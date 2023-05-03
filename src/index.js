@@ -136,8 +136,10 @@ panelContent.classList.add('panel-content');
   panelButtons.addEventListener('click', evt => {
     openButton.classList.toggle('hide-btn');
     closeButton.classList.toggle('hide-btn');
-    panelButtons.classList.toggle('toggle-on');
+    panelContent.classList.toggle('toggle-on');
   })
+
+ 
 
 
   // don't forget to return the panel!
@@ -153,8 +155,8 @@ panelContent.classList.add('panel-content');
 
 //map creates a new array, forEach mutates the original array
 
-const panelElements = panelData.map(panelData => {
-    return makePanel(panelData)
+const panelElements = panelData.map(panelObj => {
+    return makePanel(panelObj)
 })
 console.log(panelElements)
 
@@ -167,3 +169,17 @@ panelElements.forEach(panelElement => {
 // and returns an anchor tag with the right href, class and textContent.
 // Loop over the 'linkData' in the data folder, generate anchor tags
 // and append them to the nav.
+
+function linkMaker({href, className, text}) {
+  const link = document.createElement('a');
+  link.href = href;
+  link.className = className;
+  link.text = text;
+  //do not forget to return it
+  return link
+}
+
+linkData.forEach(linkObj => {
+  const linkElement = linkMaker(linkObj);
+  document.querySelector('nav').appendChild(linkElement);
+})
